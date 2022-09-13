@@ -1,3 +1,5 @@
+import {v4 as uuid} from "uuid"
+
 export const prestadores = [
     {
         id: 1,
@@ -83,5 +85,43 @@ export const prestadores = [
         stars: 5.0,
         reviews: 15.999,
         imagem: "https://uploaddeimagens.com.br/images/004/019/949/full/3.png?1663020132"
+    },
+]
+
+export const schedules = [
+    {
+        id: uuid(),
+        service: "Encanador",
+        provider: "João da Silva",
+        date: "10/10/2022",
+        hour: "15:30"
+    },
+    {
+        id: uuid(),
+        service: "Eletricista",
+        provider: "Antônio Silva",
+        date: "15/09/2022",
+        hour: "10:30"
+    },
+    {
+        id: uuid(),
+        service: "Pedreiro",
+        provider: "Rosemiro Santos",
+        date: "15/09/2022",
+        hour: "15:30"
+    },
+    {
+        id: uuid(),
+        service: "Fisioterapeuta",
+        provider: "Ivone Nunes",
+        date: "16/09/2022",
+        hour: "09:30"
+    },
+    {
+        id: uuid(),
+        service: "Mecânico",
+        provider: "Neymar Jr.",
+        date: "05/10/2022",
+        hour: "16:30"
     },
 ]
