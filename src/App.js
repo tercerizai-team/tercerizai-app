@@ -1,9 +1,12 @@
 import Ways from "./routes/routes";
+import { PrestadoresProvider } from "./providers/prestadoresProvider";
 
 function App() {
   return (
     <>
-      <Ways />
+      <PrestadoresProvider>
+        <Ways />
+      </PrestadoresProvider>
     </>
   );
 }
