@@ -1,10 +1,14 @@
 import Header from "../../../components/header";
 import ActionMenu from "../../../components/actionMenu";
 import { DivCardSchedule, DivFuturesSchedules, DivPastSchedules, SchedulesContainer } from "./styles";
-import {ImBin, ImPencil} from "react-icons/im"
 import {HiStar} from "react-icons/hi"
+import { useContext } from "react";
+import { SchedulesContext } from "../../../providers/schedules";
+import CardSchedule from "../../../components/cardSchedules";
 
 function Agendamentos () {
+
+    const {dbSchedules} = useContext(SchedulesContext)
 
     return (
         <>
@@ -14,43 +18,10 @@ function Agendamentos () {
                 <h2>Meus agendamentos</h2>
                 <h3>Agendamentos futuros</h3>
                 <DivFuturesSchedules>
-                    <DivCardSchedule>
-                        <p>Encanador</p>
-                        <p>Fulado da Silva</p>
-                        <p>Data: 15/10/2022</p>
-                        <p>Hora: 15:30</p>
-                        <p>Ver detalhes</p>
-                        <button><ImPencil /> Alterar agendamento</button>
-                        <button><ImBin /> Cancelar agendamento</button>
-                    </DivCardSchedule>
-                    <DivCardSchedule>
-                        <p>Encanador</p>
-                        <p>Fulado da Silva</p>
-                        <p>Data: 15/10/2022</p>
-                        <p>Hora: 15:30</p>
-                        <p>Ver detalhes</p>
-                        <button><ImPencil /> Alterar agendamento</button>
-                        <button><ImBin /> Cancelar agendamento</button>
-                    </DivCardSchedule>
-                    <DivCardSchedule>
-                        <p>Encanador</p>
-                        <p>Fulado da Silva</p>
-                        <p>Data: 15/10/2022</p>
-                        <p>Hora: 15:30</p>
-                        <p>Ver detalhes</p>
-                        <button><ImPencil /> Alterar agendamento</button>
-                        <button><ImBin /> Cancelar agendamento</button>
-                    </DivCardSchedule>
-                    <DivCardSchedule>
-                        <p>Encanador</p>
-                        <p>Fulado da Silva</p>
-                        <p>Data: 15/10/2022</p>
-                        <p>Hora: 15:30</p>
-                        <p>Ver detalhes</p>
-                        <button><ImPencil /> Alterar agendamento</button>
-                        <button><ImBin /> Cancelar agendamento</button>
-                    </DivCardSchedule>
                     
+                    {dbSchedules.map((elem) => (
+                        <CardSchedule key={elem.id} schedule={elem}/>
+                    ))}
                     
                 </DivFuturesSchedules>
                 <h3>Agendamentos finalizados</h3>
