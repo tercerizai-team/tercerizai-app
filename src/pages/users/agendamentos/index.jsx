@@ -1,6 +1,8 @@
 import Header from "../../../components/header";
 import ActionMenu from "../../../components/actionMenu";
 import { DivCardSchedule, DivFuturesSchedules, DivPastSchedules, SchedulesContainer } from "./styles";
+import {ImBin, ImPencil} from "react-icons/im"
+import {HiStar} from "react-icons/hi"
 
 function Agendamentos () {
 
@@ -18,8 +20,8 @@ function Agendamentos () {
                         <p>Data: 15/10/2022</p>
                         <p>Hora: 15:30</p>
                         <p>Ver detalhes</p>
-                        <button>Alterar agendamento</button>
-                        <button>Cancelar agendamento</button>
+                        <button><ImPencil /> Alterar agendamento</button>
+                        <button><ImBin /> Cancelar agendamento</button>
                     </DivCardSchedule>
                     <DivCardSchedule>
                         <p>Encanador</p>
@@ -27,8 +29,8 @@ function Agendamentos () {
                         <p>Data: 15/10/2022</p>
                         <p>Hora: 15:30</p>
                         <p>Ver detalhes</p>
-                        <button>Alterar agendamento</button>
-                        <button>Cancelar agendamento</button>
+                        <button><ImPencil /> Alterar agendamento</button>
+                        <button><ImBin /> Cancelar agendamento</button>
                     </DivCardSchedule>
                     <DivCardSchedule>
                         <p>Encanador</p>
@@ -36,8 +38,8 @@ function Agendamentos () {
                         <p>Data: 15/10/2022</p>
                         <p>Hora: 15:30</p>
                         <p>Ver detalhes</p>
-                        <button>Alterar agendamento</button>
-                        <button>Cancelar agendamento</button>
+                        <button><ImPencil /> Alterar agendamento</button>
+                        <button><ImBin /> Cancelar agendamento</button>
                     </DivCardSchedule>
                     <DivCardSchedule>
                         <p>Encanador</p>
@@ -45,8 +47,8 @@ function Agendamentos () {
                         <p>Data: 15/10/2022</p>
                         <p>Hora: 15:30</p>
                         <p>Ver detalhes</p>
-                        <button>Alterar agendamento</button>
-                        <button>Cancelar agendamento</button>
+                        <button><ImPencil /> Alterar agendamento</button>
+                        <button><ImBin /> Cancelar agendamento</button>
                     </DivCardSchedule>
                     
                     
@@ -59,7 +61,7 @@ function Agendamentos () {
                         <p>Data: 15/10/2022</p>
                         <p>Hora: 15:30</p>
                         <p>Ver detalhes</p>
-                        <button>Avaliar</button>
+                        <button><HiStar />Avaliar</button>
                     </DivCardSchedule>
                 </DivPastSchedules>
             </SchedulesContainer>

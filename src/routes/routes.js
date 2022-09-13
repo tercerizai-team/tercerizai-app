@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 
 import LandingPage from "../pages/landingPage"
+import Dashboard from "../pages/providers/dashboard"
 import Agendamentos from "../pages/users/agendamentos"
 import Carteira from "../pages/users/carteira"
 import Enderecos from "../pages/users/enderecos"
@@ -19,6 +20,8 @@ const Ways = () => {
                 <Route exact path="/users/agendamentos" element={<Agendamentos />}/>
                 <Route exact path="/users/enderecos" element={<Enderecos />}/>
                 <Route exact path="/users/carteira" element={<Carteira />}/>
+
+                <Route exact path="/dashboard" element={<Dashboard />}/>
             </Routes>
         </>
     )
