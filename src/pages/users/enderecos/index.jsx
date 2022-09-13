@@ -1,6 +1,8 @@
 import ActionMenu from "../../../components/actionMenu";
 import Header from "../../../components/header";
 import { AddressesContainer, DivAddresses, DivCardAddress } from "./styles";
+import {ImBin, ImPencil} from "react-icons/im"
+import { IoMdAddCircle } from "react-icons/io"
 
 
 
@@ -22,8 +24,8 @@ function Enderecos () {
                         <p>São Paulo</p>
                         <p>SP</p>
                         <p>CEP 05002061</p>
-                        <button>Editar</button>
-                        <span>Apagar</span>
+                        <button><ImPencil/> Editar</button>
+                        <button><ImBin/> Apagar</button>
                     </DivCardAddress>
                     <DivCardAddress>
                         <p>Trabalho</p>
@@ -32,8 +34,8 @@ function Enderecos () {
                         <p>São Paulo</p>
                         <p>SP</p>
                         <p>CEP 05002061</p>
-                        <button>Editar</button>
-                        <span>Apagar</span>
+                        <button><ImPencil/> Editar</button>
+                        <button><ImBin/> Apagar</button>
                     </DivCardAddress>
                     <DivCardAddress>
                         <p>Casa da Sogra</p>
@@ -42,12 +44,12 @@ function Enderecos () {
                         <p>São Paulo</p>
                         <p>SP</p>
                         <p>CEP 05002061</p>
-                        <button>Editar</button>
-                        <span>Apagar</span>
+                        <button><ImPencil/> Editar</button>
+                        <button><ImBin/> Apagar</button>
                     </DivCardAddress>
                 </DivAddresses>
                 <div>
-                    <button>Cadastrar novo endereço</button>
+                    <button><IoMdAddCircle /> Cadastrar novo endereço</button>
                 </div>
             </AddressesContainer>
         </>

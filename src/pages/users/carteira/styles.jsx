@@ -29,7 +29,19 @@ export const DivCardCarteira = styled.div`
     border: 1px solid black;
     padding: 10px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
     width: 200px;
+
+    .divCardCateira1{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .divCardCateira2{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
 `
