@@ -55,7 +55,8 @@ function SignIn() {
           />
           <Btn>Entrar</Btn>
           <span>
-            Ainda não tem uma conta? <Link to={"/SingUp"}>Cadastre-se</Link>
+            Ainda não tem uma conta?{" "}
+            <Link to={"/signUpLanding"}>Cadastre-se</Link>
           </span>
         </form>
       </Container>

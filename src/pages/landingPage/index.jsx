@@ -35,7 +35,7 @@ function LandingPage() {
             processos durante essa jornada.
           </Text>
           <Btn onClick={() => navigate("/signIn")}>Login</Btn>
-          <Btn onClick={() => navigate("/signUp")}>Cadastre-se</Btn>
+          <Btn onClick={() => navigate("/signUpLanding")}>Cadastre-se</Btn>
         </TextContainer>
         <ImgContainer>
           <img src={ajuda} alt="eletricista" />
