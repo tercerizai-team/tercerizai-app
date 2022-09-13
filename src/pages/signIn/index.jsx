@@ -31,10 +31,10 @@ function SignIn() {
 
   return (
     <Content>
-      <ContainerImage>
+      <ContainerImage tamanho="280px">
         <img src={maquina} alt="maquina" />
       </ContainerImage>
-      <Container>
+      <Container heigh="300px">
         <form onSubmit={handleSubmit(onSubmit)}>
           {errors.email ? <h3>{errors.email?.message}</h3> : <p>E-mail</p>}
           <input
@@ -42,11 +42,7 @@ function SignIn() {
             {...register("email")}
             className={errors.email ? "erro" : ""}
           />
-          {errors.password ? (
-            <h3>{errors.password?.message}</h3>
-          ) : (
-            <p>E-mail</p>
-          )}
+          {errors.password ? <h3>{errors.password?.message}</h3> : <p>Senha</p>}
           <input
             placeholder="Senha"
             type={"password"}
@@ -63,4 +59,5 @@ function SignIn() {
     </Content>
   );
 }
+
 export default SignIn;
