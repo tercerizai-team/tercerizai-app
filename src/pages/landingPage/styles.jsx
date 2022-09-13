@@ -44,14 +44,13 @@ export const Btn = styled.button`
   box-shadow: #353535 1px 1px 1px 1px;
   transition: ease-in-out 0.5s;
   :hover {
-    transform: scale(110%);
     cursor: pointer;
   }
 `;
 
 export const ImgContainer = styled.div`
   img {
-    width: 200px;
+    width: 500px;
   }
 `;
 

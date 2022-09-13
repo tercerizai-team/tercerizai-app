@@ -15,11 +15,13 @@ import banheiro from "../../Assets/banheiro.png";
 import encanador from "../../Assets/encanador.png";
 import encana from "../../Assets/encana.png";
 import mecanico from "../../Assets/mecanico.png";
+import ajuda from "../../Assets/ajuda.png";
 
 import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
   let navigate = useNavigate();
+
   return (
     <>
       <Container>
@@ -36,7 +38,7 @@ function LandingPage() {
           <Btn onClick={() => navigate("/signUp")}>Cadastre-se</Btn>
         </TextContainer>
         <ImgContainer>
-          <img src={eletricista} alt="eletricista" />
+          <img src={ajuda} alt="eletricista" />
         </ImgContainer>
       </Container>
       <Container1>
