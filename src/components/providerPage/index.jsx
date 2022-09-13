@@ -1,36 +1,56 @@
-import { ProviderContainer } from "./styles";
+import { BookingDiv, ProviderContainer } from "./styles";
 import { useContext } from "react";
 import { PrestadoresContext } from "../../providers/prestadoresProvider";
-import { HeaderPrestador, CalendarPrestador } from "./styles";
-import Calendar from 'react-calendar'
+import { HeaderPrestador } from "./styles";
 import { useState } from "react";
 import 'react-calendar/dist/Calendar.css';
 
-// teste
+import dayjs from 'dayjs';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
-// import TextField from '@mui/material/TextField';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+
+
 
 function ProviderPage(props) {
 
-    // const [value, setValue] = useState(null);
+  // teste
 
-  const [value, onChange] = useState(new Date());
+  const [agendamento, setAgendamento] = useState({});
+  const [detailsSchedule, setDetailsSchedule] = useState('')
 
-  const { idSeller } = props.idSeller;
+  const [value, setValue] = useState(dayjs('2022-08-18T21:11:54'));
 
-  const { dbPrestadores } = useContext(PrestadoresContext);
+  // console.log(value.$d)
+  // console.log(detailsSchedule)
 
-  const prestador = dbPrestadores.find((elem) => elem.id == idSeller);
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
 
   const handleSchedule = () => {
 
-    console.log(value)
-
+    setAgendamento({
+      time: value.$d,
+      details: detailsSchedule
+    })
   }
 
+  console.log(agendamento)
+
+
+  const { idSeller } = props.idSeller;
+
+  const newId = Number(idSeller)
+
+  const { dbPrestadores } = useContext(PrestadoresContext);
+
+  const prestador = dbPrestadores.find((elem) => elem.id === newId);
 
   return (
     <ProviderContainer>
@@ -41,31 +61,51 @@ function ProviderPage(props) {
                 <p className="prestadorCategory">{prestador.category}</p>
             </div>
         </HeaderPrestador>
-        <CalendarPrestador>
+        {/* <CalendarPrestador>
             <h3>Selecione a melhor data para o serviço</h3>
             <Calendar onChange={onChange} value={value}/>
             <button onClick={handleSchedule} className="btnNextTime">Escolher horário</button>
-        </CalendarPrestador>
-
-{/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
-        label="Basic example"
-        value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} />}
-      />
-    </LocalizationProvider> */}
-
-
-
-        <div>
-            Avaliações
+        </CalendarPrestador> */}
+      <BookingDiv>
+        <div className="BookingDiv1">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3}>
+              <DesktopDatePicker
+                label="Selecione a data"
+                inputFormat="DD/MM/YYYY"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+          
+              <TimePicker
+                label="Selecione o horário"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack>
+          </LocalizationProvider>
         </div>
-        <div>
-            Agenda
+        <div className="BookingDiv2">
+          <TextField
+              id="outlined-multiline-static"
+              label="Descreva o serviço"
+              multiline
+              rows={2}
+              value={detailsSchedule}
+              onChange={(event) => {
+                setDetailsSchedule(event.target.value)
+              }}
+          />
+          <button className="btnConfirmSchedule" onClick={() => handleSchedule()}>Agendar</button>
         </div>
+    </BookingDiv>
+
+
+
+
+
     </ProviderContainer>
   );
 }

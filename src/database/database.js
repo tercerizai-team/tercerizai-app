@@ -17,15 +17,15 @@ export const prestadores = [
         reviews: 235,
         imagem: "https://uploaddeimagens.com.br/images/004/019/945/full/1.png?1663020034"
     },
-    {
-        id: 3,
-        name: "Fábio Jr.",
-        category: "Cantor",
-        price: 450,
-        stars: 3.5,
-        reviews: 1098,
-        imagem: "https://uploaddeimagens.com.br/images/004/019/955/full/7.png?1663020211"
-    },
+    // {
+    //     id: 3,
+    //     name: "Fábio Jr.",
+    //     category: "Cantor",
+    //     price: 450,
+    //     stars: 3.5,
+    //     reviews: 1098,
+    //     imagem: "https://uploaddeimagens.com.br/images/004/019/955/full/7.png?1663020211"
+    // },
     {
         id: 4,
         name: "Mateus Bonacina",

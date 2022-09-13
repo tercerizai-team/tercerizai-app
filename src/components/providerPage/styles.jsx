@@ -51,15 +51,36 @@ export const CalendarPrestador = styled.div`
         }
 
     }
-    /* button{
-    font-size: 15px;
-    align-self: center;
-    padding: 6px 25px;
-    background-color: #f8e71c;
-    cursor: pointer;
-    box-shadow: 2px 2px 0px 0px #000;
+`
+
+export const BookingDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 25px;
+
+    .BookingDiv1{
+
+    }
+
+    .BookingDiv2{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btnConfirmSchedule{
+        align-self: flex-end;
+        font-size: 15px;
+        padding: 6px 25px;
+        width: 180px;
+        background-color: #f8e71c;
+        cursor: pointer;
+        box-shadow: 2px 2px 0px 0px #000;
         :hover{
             transform: scale(1.02);
         }
-    } */
+    }
 `
