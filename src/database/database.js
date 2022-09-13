@@ -6,7 +6,18 @@ export const prestadores = [
         price: 25,
         stars: 4.3,
         reviews: 532,
-        imagem: "https://uploaddeimagens.com.br/images/004/019/948/full/2.png?1663020097"
+        imagem: "https://uploaddeimagens.com.br/images/004/019/948/full/2.png?1663020097",
+        addresses: [
+            {
+                "state": "PE",
+                "street": "Rua tal",
+                "district": "Bairro tal",
+                "number": "32",
+                "complement": "Portão azul",
+                "city": "Recife",
+                "zipCode": "12345678"
+              }
+        ]
     },
     {
         id: 2,
@@ -15,7 +26,18 @@ export const prestadores = [
         price: 16.90,
         stars: 4.8,
         reviews: 235,
-        imagem: "https://uploaddeimagens.com.br/images/004/019/945/full/1.png?1663020034"
+        imagem: "https://uploaddeimagens.com.br/images/004/019/945/full/1.png?1663020034",
+        addresses: [
+            {
+                "state": "SP",
+                "street": "Rua das Araras",
+                "district": "Ribeiro",
+                "number": "322",
+                "complement": "Apto 74",
+                "city": "São Paulo",
+                "zipCode": "05002061"
+              }
+        ]
     },
     // {
     //     id: 3,
@@ -56,10 +78,10 @@ export const prestadores = [
     {
         id: 7,
         name: "William Cabral",
-        category: "Pai dos Devs",
-        price: 1075,
+        category: "Rei dos Devs",
+        price: 18075,
         stars: 5.0,
-        reviews: 4.965,
+        reviews: 15.999,
         imagem: "https://uploaddeimagens.com.br/images/004/019/949/full/3.png?1663020132"
     },
 ]

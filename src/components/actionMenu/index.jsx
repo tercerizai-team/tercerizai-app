@@ -1,15 +1,18 @@
 import { ActionMenuContainer, LinkActionMenu } from "./styles"
+import { useNavigate } from "react-router-dom"
 
 function ActionMenu () {
+
+    const navigate = useNavigate()
 
 
     return (
         <ActionMenuContainer>
-            <LinkActionMenu>Agendamentos</LinkActionMenu>
-            <LinkActionMenu>Endereços</LinkActionMenu>
-            <LinkActionMenu>Carteira</LinkActionMenu>
-            <LinkActionMenu>Favoritos</LinkActionMenu>
-            <LinkActionMenu>Avaliações</LinkActionMenu>
+            <LinkActionMenu onClick={() => navigate('/users/agendamentos')}>Agendamentos</LinkActionMenu>
+            <LinkActionMenu onClick={() => navigate('/users/enderecos')}>Endereços</LinkActionMenu>
+            <LinkActionMenu onClick={() => navigate('/users/carteira')}>Carteira</LinkActionMenu>
+            <LinkActionMenu onClick={() => navigate('/users/favoritos')}>Favoritos</LinkActionMenu>
+            <LinkActionMenu onClick={() => navigate('/users/avaliacoes')}>Avaliações</LinkActionMenu>
         </ActionMenuContainer>
     )
 }
