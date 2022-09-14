@@ -1,6 +1,9 @@
-import { MenuItem, Select, TextField } from "@mui/material"
+import { Button, FormHelperText, MenuItem, Select, TextField } from "@mui/material"
 import { useState } from "react";
 import { FormNewAddress } from "./styles"
+import * as yup from 'yup';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
 
 
 function NewAddress () {
@@ -11,30 +14,61 @@ function NewAddress () {
         setEstado(event.target.value);
     };
 
+    const formSchema = yup.object().shape({
+        street: yup
+            .string()
+            .required('Rua obrigatório'),
+        number: yup
+            .string()
+            .required('Número obrigatório'),
+        complement: yup
+            .string(),
+        district: yup
+            .string()
+            .required('Bairro obrigatório'),
+        city: yup
+            .string()
+            .required('Cidade obrigatório'),
+        zipCode: yup
+            .string()
+            .required('CEP obrigatório')
+            .matches('^[0-9]{8}$', 'Somente números'),
+    })
+
+    const [error, setError] = useState(true)
+
+    const {register, handleSubmit, formState: { errors },} = useForm({resolver: yupResolver(formSchema)})
+
+    const onSubmit = (data) => {
+        console.log(data)
+    }
+
 
     return (
-        <FormNewAddress>
+        <FormNewAddress onSubmit={handleSubmit(onSubmit)}>
             
             <h2>Cadastre um novo endereço</h2>
-            <TextField id="outlined-basic" label="Rua" variant="outlined" />
+            <TextField error={!!errors.street} id="outlined-basic" label="Rua*" variant="outlined" {...register('street')}/>
             <div>
-                <TextField id="outlined-basic" label="Número" variant="outlined" />
-                <TextField id="outlined-basic" label="Complemento" variant="outlined" />
+                <TextField error={!!errors.number} id="outlined-basic" label="Número*" variant="outlined" {...register('number')}/>
+                <TextField error={!!errors.complement}  id="outlined-basic" label="Complemento" variant="outlined" {...register('complement')}/>
             </div>
-            <TextField id="outlined-basic" label="Bairro" variant="outlined" />
-            <TextField id="outlined-basic" label="Cidade" variant="outlined" />
+            <TextField error={!!errors.district} id="outlined-basic" label="Bairro*" variant="outlined" {...register('district')}/>
+            <TextField error={!!errors.city} id="outlined-basic" label="Cidade*" variant="outlined" {...register('city')}/>
             <div>
                 <Select
+                    error={!!errors.state}
                     labelId="uf-label"
                     id="uf"
                     value={estado}
-                    label="Age"
+                    label="UF"
                     onChange={handleChange}
                     displayEmpty
                     sx={{ minWidth: 225 }}
+                    {...register('state')}
                 >
                     <MenuItem value="">
-                        <em>UF</em>
+                        <em>UF*</em>
                     </MenuItem>
                     <MenuItem value={'AC'}>AC</MenuItem>
                     <MenuItem value={'AL'}>AL</MenuItem>
@@ -65,9 +99,10 @@ function NewAddress () {
                     <MenuItem value={'DF'}>DF</MenuItem>
                 </Select>
 
-                <TextField id="outlined-basic" label="CEP" variant="outlined" />
+                <TextField error={!!errors.zipCode} id="outlined-basic" label="CEP*" variant="outlined" {...register('zipCode')}/>
             </div>
-            <button>Cadastrar</button>
+            <Button variant="contained" type="submit">Cadastrar</Button>
+            
             
         </FormNewAddress>
     )

@@ -12,8 +12,6 @@ import NewAddress from "../../../components/newAddress";
 import { useContext } from "react";
 import { AddressesContext } from "../../../providers/userAddresses.provider";
 import CardAddress from "../../../components/cardAddresses";
-import EditAddress from "../../../components/editAddress";
-import EditAddressUser from "../../../components/editAddress";
 
 const style = {
     position: 'absolute',
@@ -35,7 +33,6 @@ function Enderecos () {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    console.log(dbAddresses)
 
     return (
 
