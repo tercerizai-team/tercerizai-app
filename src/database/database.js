@@ -125,3 +125,39 @@ export const schedules = [
         hour: "16:30"
     },
 ]
+
+export const userAddresses = [
+    {
+        id: "c110dbb6-beb9-4682-ab63-2c12a570d66b",
+        state: "PE",
+        street: "Rua tal",
+        district: "Bairro tal",
+        number: "32",
+        complement: "Portão azul",
+        city: "Recife",
+        zipCode: "12345678",
+        name: "Casa de Praia"
+    },
+    {
+        id: "c110dbb6-beb9-4682-ab63-2c12a570d66c",
+        state: "SP",
+        street: "Rua Sergipe",
+        district: "Higienópolis",
+        number: "447",
+        complement: "Cj 112",
+        city: "São Paulo",
+        zipCode: "01243001",
+        name: "Trabalho"
+    },
+    {
+        id: "c110dbb6-beb9-4682-ab63-2c12a570d66d",
+        state: "SP",
+        street: "Rua Bahia",
+        district: "Higienópolis",
+        number: "377",
+        complement: "Apto 47",
+        city: "São Paulo",
+        zipCode: "01243005",
+        name: "Casa"
+    }
+]

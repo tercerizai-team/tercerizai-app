@@ -1,12 +1,11 @@
-import { Button, FormHelperText, MenuItem, Select, TextField } from "@mui/material"
+import { MenuItem, Select, TextField } from "@mui/material"
 import { useState } from "react";
 import { FormNewAddress } from "./styles"
-import * as yup from 'yup';
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
 
 
-function NewAddress () {
+function EditAddressUser (props) {
+
+    const {id, state, street, district, number, complement, city, zipCode, name} = props.address
 
     const [estado, setEstado] = useState('');
 
@@ -14,61 +13,30 @@ function NewAddress () {
         setEstado(event.target.value);
     };
 
-    const formSchema = yup.object().shape({
-        street: yup
-            .string()
-            .required('Rua obrigatório'),
-        number: yup
-            .string()
-            .required('Número obrigatório'),
-        complement: yup
-            .string(),
-        district: yup
-            .string()
-            .required('Bairro obrigatório'),
-        city: yup
-            .string()
-            .required('Cidade obrigatório'),
-        zipCode: yup
-            .string()
-            .required('CEP obrigatório')
-            .matches('^[0-9]{8}$', 'Somente números'),
-    })
-
-    const [error, setError] = useState(true)
-
-    const {register, handleSubmit, formState: { errors },} = useForm({resolver: yupResolver(formSchema)})
-
-    const onSubmit = (data) => {
-        console.log(data)
-    }
-
 
     return (
-        <FormNewAddress onSubmit={handleSubmit(onSubmit)}>
+        <FormNewAddress>
             
-            <h2>Cadastre um novo endereço</h2>
-            <TextField error={!!errors.street} id="outlined-basic" label="Rua*" variant="outlined" {...register('street')}/>
+            <h2>Editar endereço</h2>
+            <TextField id="outlined-basic" label="Rua" variant="outlined" defaultValue={street} />
             <div>
-                <TextField error={!!errors.number} id="outlined-basic" label="Número*" variant="outlined" {...register('number')}/>
-                <TextField error={!!errors.complement}  id="outlined-basic" label="Complemento" variant="outlined" {...register('complement')}/>
+                <TextField id="outlined-basic" label="Número" variant="outlined" defaultValue={number}/>
+                <TextField id="outlined-basic" label="Complemento" variant="outlined" defaultValue={complement}/>
             </div>
-            <TextField error={!!errors.district} id="outlined-basic" label="Bairro*" variant="outlined" {...register('district')}/>
-            <TextField error={!!errors.city} id="outlined-basic" label="Cidade*" variant="outlined" {...register('city')}/>
+            <TextField id="outlined-basic" label="Bairro" variant="outlined" defaultValue={district}/>
+            <TextField id="outlined-basic" label="Cidade" variant="outlined" defaultValue={city}/>
             <div>
                 <Select
-                    error={!!errors.state}
                     labelId="uf-label"
                     id="uf"
                     value={estado}
-                    label="UF"
+                    label="Age"
                     onChange={handleChange}
                     displayEmpty
                     sx={{ minWidth: 225 }}
-                    {...register('state')}
                 >
                     <MenuItem value="">
-                        <em>UF*</em>
+                        <em>UF</em>
                     </MenuItem>
                     <MenuItem value={'AC'}>AC</MenuItem>
                     <MenuItem value={'AL'}>AL</MenuItem>
@@ -99,13 +67,12 @@ function NewAddress () {
                     <MenuItem value={'DF'}>DF</MenuItem>
                 </Select>
 
-                <TextField error={!!errors.zipCode} id="outlined-basic" label="CEP*" variant="outlined" {...register('zipCode')}/>
+                <TextField id="outlined-basic" label="CEP" variant="outlined" defaultValue={zipCode}/>
             </div>
-            <Button variant="contained" type="submit">Cadastrar</Button>
-            
+            <button>Cadastrar</button>
             
         </FormNewAddress>
     )
 }
 
-export default NewAddress
+export default EditAddressUser
