@@ -7,21 +7,50 @@ export const AddressesContext = createContext([]);
 export const AddressesProvider = ({children}) => {
 
     const [dbAddresses, setDbAddresses] = useState([]);
-    const [newAddress, setNewAddress] = useState({})
-
-    const registerNewAddress = () => {
-
-        axios.post(`${baseUrl}/address`, newAddress, {
+    
+    const registerNewAddress = async (data) => {
+        let response = false
+        await axios.post(`${baseUrl}/address`, data, {
             headers: {
                 Authorization: `Bearer ${userToken}`,
             }
         })
-            .then((res) => console.log(res))
+            .then((res) => {
+                response = true
+                refreshAddress()})
             .catch((err) => console.log(err))
+            
+    return response
+
+    }
+
+    const deleteAddress = (idAddress) => {
+
+        axios.delete(`${baseUrl}/address/${idAddress}`, {
+            headers: {
+                Authorization: `Bearer ${userToken}`
+            }
+        })
+        .then((res) => refreshAddress())
+        .catch((err) => console.log(err))
+    }
+
+    const refreshAddress = () => {
+        
+        axios.get(`${baseUrl}/address`, {
+            headers: {
+                Authorization: `Bearer ${userToken}`,
+            }
+        })
+            .then((res) => setDbAddresses(res.data))
+            .catch((err) => console.log(err))
+
     }
 
     useEffect(() => {
-        setDbAddresses(userAddresses)
+
+        refreshAddress()
+
     }, [])
 
     return (
@@ -29,9 +58,9 @@ export const AddressesProvider = ({children}) => {
         <AddressesContext.Provider value={{
             dbAddresses,
             setDbAddresses,
-            newAddress,
-            setNewAddress,
-            registerNewAddress
+            registerNewAddress,
+            deleteAddress,
+            refreshAddress
             }}>
 
             {children}

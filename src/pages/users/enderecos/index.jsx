@@ -58,7 +58,7 @@ function Enderecos () {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                <NewAddress />
+                <NewAddress handleClose={handleClose}/>
                 </Box>
             </Modal>
         </>

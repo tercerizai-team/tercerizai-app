@@ -4,13 +4,14 @@ import { FormNewAddress } from "./styles"
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-
+import { toast } from 'react-toastify';
 import { AddressesContext } from "../../providers/userAddresses.provider";
 import { useContext } from "react";
 
-function NewAddress () {
+function NewAddress ({handleClose}) {
 
-    const {setNewAddress, registerNewAddress} = useContext(AddressesContext)
+    
+    const {registerNewAddress} = useContext(AddressesContext)
 
     const [estado, setEstado] = useState('AC');
 
@@ -46,10 +47,23 @@ function NewAddress () {
 
     const {register, handleSubmit, formState: { errors },} = useForm({resolver: yupResolver(formSchema)})
 
-    const onSubmit = (data) => {
-        console.log(data)
-        setNewAddress(data)
-        registerNewAddress()
+    const onSubmit = async (data) => {
+        const response = new Promise (async(resolve, reject) => {
+            const newAddress = await registerNewAddress(data)
+
+            if (newAddress) {
+                setTimeout(resolve)
+                handleClose()
+            } else {
+                setTimeout(reject)
+            }
+        })
+
+        toast.promise(response, {
+            pending: 'Processando',
+            success: 'Endereço cadastrado',
+            error: 'Endereço já existe'
+        })
     }
 
 
