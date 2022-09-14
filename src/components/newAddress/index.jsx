@@ -1,14 +1,18 @@
-import { Button, FormHelperText, MenuItem, Select, TextField } from "@mui/material"
+import { Button,  MenuItem, Select, TextField } from "@mui/material"
 import { useState } from "react";
 import { FormNewAddress } from "./styles"
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { AddressesContext } from "../../providers/userAddresses.provider";
+import { useContext } from "react";
 
 function NewAddress () {
 
-    const [estado, setEstado] = useState('');
+    const {setNewAddress, registerNewAddress} = useContext(AddressesContext)
+
+    const [estado, setEstado] = useState('AC');
 
     const handleChange = (event) => {
         setEstado(event.target.value);
@@ -29,6 +33,9 @@ function NewAddress () {
         city: yup
             .string()
             .required('Cidade obrigatório'),
+        state: yup
+            .string()
+            .required('Estado obrigatório'),
         zipCode: yup
             .string()
             .required('CEP obrigatório')
@@ -41,6 +48,8 @@ function NewAddress () {
 
     const onSubmit = (data) => {
         console.log(data)
+        setNewAddress(data)
+        registerNewAddress()
     }
 
 
@@ -57,19 +66,16 @@ function NewAddress () {
             <TextField error={!!errors.city} id="outlined-basic" label="Cidade*" variant="outlined" {...register('city')}/>
             <div>
                 <Select
-                    error={!!errors.state}
+                    
                     labelId="uf-label"
                     id="uf"
                     value={estado}
                     label="UF"
-                    onChange={handleChange}
                     displayEmpty
                     sx={{ minWidth: 225 }}
                     {...register('state')}
+                    onChange={(e) => {handleChange(e)}}
                 >
-                    <MenuItem value="">
-                        <em>UF*</em>
-                    </MenuItem>
                     <MenuItem value={'AC'}>AC</MenuItem>
                     <MenuItem value={'AL'}>AL</MenuItem>
                     <MenuItem value={'AP'}>AP</MenuItem>
