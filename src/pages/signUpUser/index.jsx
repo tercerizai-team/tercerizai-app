@@ -1,6 +1,6 @@
 import { Btn } from "../landingPage/styles";
 import { Content } from "../signIn/styles";
-import pessoa from "../../Assets/pessoa.png";
+import pessoa from "../../assets/pessoa.png";
 import { ContainerImageSignUp, ContainerSignUp } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";

@@ -1,19 +1,21 @@
 import ActionMenu from "../../../components/actionMenu";
-import CardContainer from "../../../components/cardsContainer";
 import CategoriesMenu from "../../../components/categoriesMenu";
 import Header from "../../../components/header";
+import ProviderPage from "../../../components/providerPage";
+import { useParams } from "react-router-dom"
 
+function Prestadores () {
 
-function Home () {
+    const idSeller = useParams()
 
     return (
         <>
             <Header />
             <ActionMenu />
             <CategoriesMenu />
-            <CardContainer />
+            <ProviderPage idSeller={idSeller}/>
         </>
     )
 }
 
-export default Home
+export default Prestadores

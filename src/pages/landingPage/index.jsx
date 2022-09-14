@@ -10,12 +10,12 @@ import {
   Title,
   Upper,
 } from "./styles";
-import eletricista from "../../Assets/Eletricista.png";
-import banheiro from "../../Assets/banheiro.png";
-import encanador from "../../Assets/encanador.png";
-import encana from "../../Assets/encana.png";
-import mecanico from "../../Assets/mecanico.png";
-import ajuda from "../../Assets/ajuda.png";
+import eletricista from "../../assets/Eletricista.png";
+import banheiro from "../../assets/banheiro.png";
+import encanador from "../../assets/encanador.png";
+import encana from "../../assets/encana.png";
+import mecanico from "../../assets/mecanico.png";
+import ajuda from "../../assets/ajuda.png";
 
 import { useNavigate } from "react-router-dom";
 

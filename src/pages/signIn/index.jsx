@@ -1,6 +1,6 @@
 import { Btn } from "../landingPage/styles";
 import { Container, ContainerImage, Content } from "./styles";
-import maquina from "../../Assets/maquina.png";
+import maquina from "../../assets/maquina.png";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";

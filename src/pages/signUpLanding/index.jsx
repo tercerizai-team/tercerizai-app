@@ -1,15 +1,18 @@
 import { Button, Container, ContainerGeral } from "./styles";
-import banheiro from "../../Assets/banheiro.png";
-import pessoa from "../../Assets/pessoa.png";
+import banheiro from "../../assets/banheiro.png";
+import pessoa from "../../assets/pessoa.png";
 import { Title } from "../landingPage/styles";
+import { useNavigate } from "react-router-dom";
 
 function SignUpLanding() {
+  let navigate = useNavigate();
+
   return (
     <>
       <ContainerGeral>
         <Title>O que você procura?</Title>
         <Container>
-          <Button>
+          <Button onClick={() => navigate("/signUpUser")}>
             <img src={pessoa} alt="cliente" />
             Estou a procura de profissionais
           </Button>
