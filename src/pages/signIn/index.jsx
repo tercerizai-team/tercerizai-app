@@ -38,7 +38,7 @@ function SignIn() {
     axios
       .post(`${baseUrl}/login`, data)
       .then((res) => {
-        setToken(res.data.token);
+        localStorage.setItem("token", res.data.token);
         if (res.data.isProvider) {
           navigate("/dashboard");
         } else {
