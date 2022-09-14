@@ -17,7 +17,7 @@ function SignUpLanding() {
             Estou a procura de profissionais
           </Button>
 
-          <Button>
+          <Button onClick={() => navigate("/signUpProvider")}>
             <img src={banheiro} alt="provedor" />
             Estou a procura de clientes
           </Button>

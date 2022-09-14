@@ -10,6 +10,7 @@ import Prestadores from "../pages/users/prestador";
 import SignIn from "../pages/signIn";
 import SignUpLanding from "../pages/signUpLanding";
 import SignUpUser from "../pages/signUpUser";
+import SignUpProvider from "../pages/signUpProvider";
 
 const Ways = () => {
   return (
@@ -30,6 +31,7 @@ const Ways = () => {
         <Route exact path="/users/enderecos" element={<Enderecos />} />
         <Route exact path="/users/carteira" element={<Carteira />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/signUpProvider" element={<SignUpProvider />} />
       </Routes>
     </>
   );

@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
-  //   let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
@@ -27,6 +27,7 @@ function SignIn() {
 
   const onSubmit = (data) => {
     console.log(data);
+    navigate("/Home");
   };
 
   return (
