@@ -6,10 +6,19 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { baseUrl } from "../../database/database";
+import { useContext } from "react";
+import { UserTokenContext } from "../../providers/userToken";
+import { toast, ToastContainer } from "react-toastify";
 
 function SignIn() {
-  let navigate = useNavigate();
+  const { token, setToken } = useContext(UserTokenContext);
 
+  const sucsses = () =>
+    toast.success("Você será redirecionado para página inicial");
+
+  let navigate = useNavigate();
   const schema = yup.object().shape({
     email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
     password: yup.string().required("Campo obrigatório"),
@@ -26,12 +35,22 @@ function SignIn() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    console.log(data);
-    navigate("/Home");
+    axios
+      .post(`${baseUrl}/login`, data)
+      .then((res) => {
+        setToken(res.data.token);
+        if (res.data.isProvider) {
+          navigate("/dashboard");
+        } else {
+          navigate("/home");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <Content>
+      <ToastContainer />
       <ContainerImage tamanho="280px">
         <img src={maquina} alt="maquina" />
       </ContainerImage>
