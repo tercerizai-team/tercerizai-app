@@ -67,10 +67,10 @@ function ProviderPage(props) {
   return (
     <ProviderContainer>
         <HeaderPrestador>
-            <img src={prestador.imagem} alt={prestador.name}/>
+            <img src={prestador?.imagem} alt={prestador?.name}/>
             <div>
-                <p className="prestadorName">{prestador.name}</p>
-                <p className="prestadorCategory">{prestador.category}</p>
+                <p className="prestadorName">{prestador?.name}</p>
+                <p className="prestadorCategory">{prestador?.category}</p>
             </div>
         </HeaderPrestador>
         {/* <CalendarPrestador>
