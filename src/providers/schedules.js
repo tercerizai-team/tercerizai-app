@@ -9,7 +9,7 @@ export const SchedulesProdiver = ({children}) => {
     const [dbSchedules, setDbSchedules] = useState([])
 
     useEffect(() => {
-        setDbSchedules(dbSchedules)
+        setDbSchedules(schedules)
     }, [])
 
     return (
