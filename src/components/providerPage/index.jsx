@@ -1,5 +1,5 @@
 import { BookingDiv, ProviderContainer } from "./styles";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { PrestadoresContext } from "../../providers/prestadoresProvider";
 import { HeaderPrestador } from "./styles";
 import { useState } from "react";
@@ -12,6 +12,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { MenuItem, Select } from "@mui/material";
+import { AddressesContext } from "../../providers/userAddresses.provider";
 
 
 
@@ -19,15 +21,20 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 function ProviderPage(props) {
 
-  // teste
+  const {dbAddresses} = useContext(AddressesContext)
+
+  
 
   const [agendamento, setAgendamento] = useState({});
   const [detailsSchedule, setDetailsSchedule] = useState('')
+  const [userAddress, setUserAddress] = useState('Selecione')
 
-  const [value, setValue] = useState(dayjs('2022-08-18T21:11:54'));
+  const [value, setValue] = useState(null);
+  const [valueHour, setValueHour] = useState(null)
 
-  // console.log(value.$d)
-  // console.log(detailsSchedule)
+  const handleAddress = (event) => {
+    setUserAddress(event.target.value)
+  }
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -36,8 +43,13 @@ function ProviderPage(props) {
   const handleSchedule = () => {
 
     setAgendamento({
-      time: value.$d,
-      details: detailsSchedule
+      serviceDate: `${value.$y}-${value.$M+1}-${value.$D}`,
+      hour: `${valueHour.$H}:${valueHour.$m}`,
+      finishServiceHour: `${valueHour.$H+1}:${valueHour.$m}`,
+      description: detailsSchedule,
+      value: 0,
+      providerId: idSeller,
+      addressId: userAddress
     })
   }
 
@@ -80,8 +92,8 @@ function ProviderPage(props) {
           
               <TimePicker
                 label="Selecione o horário"
-                value={value}
-                onChange={handleChange}
+                value={valueHour}
+                onChange={setValueHour}
                 renderInput={(params) => <TextField {...params} />}
               />
             </Stack>
@@ -98,6 +110,21 @@ function ProviderPage(props) {
                 setDetailsSchedule(event.target.value)
               }}
           />
+          <Select
+                    
+                    labelId="uf-label"
+                    id="uf"
+                    label="UF"
+                    value={userAddress}
+                    displayEmpty
+                    sx={{ minWidth: 225 }}
+                    onChange={(e) => {handleAddress(e)}}
+                >
+                    <MenuItem value={'Selecione'}>Selecione</MenuItem>
+                    {dbAddresses.map((elem) => (
+                      <MenuItem key={elem.id} value={elem.id}>{elem.address.street}</MenuItem>
+                    ))}
+                </Select>
           <button className="btnConfirmSchedule" onClick={() => handleSchedule()}>Agendar</button>
         </div>
     </BookingDiv>
