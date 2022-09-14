@@ -1,5 +1,6 @@
+import axios from "axios";
 import { createContext, useState, useEffect } from "react";
-import { schedules } from "../database/database";
+import { baseUrl, schedules, userToken } from "../database/database";
 
 export const SchedulesContext = createContext([]);
 
@@ -8,7 +9,7 @@ export const SchedulesProdiver = ({children}) => {
     const [dbSchedules, setDbSchedules] = useState([])
 
     useEffect(() => {
-        setDbSchedules(schedules)
+        setDbSchedules(dbSchedules)
     }, [])
 
     return (

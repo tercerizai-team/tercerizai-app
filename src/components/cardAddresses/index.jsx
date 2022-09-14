@@ -4,6 +4,8 @@ import { useState } from "react";
 import {ImBin, ImPencil} from "react-icons/im"
 import EditAddressUser from "../editAddress";
 import { DivCardAddress } from "./styles"
+import { useContext } from "react";
+import { AddressesContext } from "../../providers/userAddresses.provider";
 
 const style = {
     position: 'absolute',
@@ -19,7 +21,9 @@ const style = {
 
 function CardAddress (props) {
 
-    const {id, state, street, district, number, complement, city, zipCode, name} = props.address
+    const {deleteAddress, refreshAddress} = useContext(AddressesContext)
+
+    const {id, state, street, district, number, complement, city, zipCode, name} = props.address.address
 
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => {setOpen(true)};
@@ -28,6 +32,12 @@ function CardAddress (props) {
     const [openEditModal, setOpenEditModal] = useState(false);
     const handleOpenEditModal = () => setOpenEditModal(true);
     const handleCloseEditModal = () => setOpenEditModal(false);
+
+    const handleDelete = (id) => {
+        deleteAddress(id)
+        handleClose()
+        refreshAddress()
+    }
 
     return(
         <>
@@ -57,7 +67,7 @@ function CardAddress (props) {
                     </DialogContent>
                     <DialogActions>
                     <Button onClick={handleClose}>Voltar</Button>
-                    <Button onClick={handleClose} autoFocus>
+                    <Button onClick={() => handleDelete(id)} autoFocus>
                         Apagar endereço
                     </Button>
                     </DialogActions>
@@ -71,7 +81,7 @@ function CardAddress (props) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <EditAddressUser address={props.address}/>
+                    <EditAddressUser address={props.address.address}/>
                 </Box>
             </Modal>
             </div>
