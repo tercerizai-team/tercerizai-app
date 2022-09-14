@@ -161,3 +161,7 @@ export const userAddresses = [
         name: "Casa"
     }
 ]
+
+export const baseUrl = 'https://tercerizai-api.herokuapp.com'
+
+export const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGVnYW9AZ21haWwuY29tIiwidXNlcklkIjoiMjNlY2UyYmYtNDI5Zi00NDhhLTg0MGYtYjNmMDI3YTEzMWU3IiwidXNlcklzQWRtIjpmYWxzZSwiaWF0IjoxNjYzMTcxNzY0LCJleHAiOjE2NjMxNzg5NjR9.MbuNqvOsIJzbNtkj_8ErPn2z2JfeMN7JmYsDnHCT3-A"
