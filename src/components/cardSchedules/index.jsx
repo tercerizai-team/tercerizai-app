@@ -1,11 +1,17 @@
 import { DivCardSchedule } from "./styles"
 import {ImBin, ImPencil} from "react-icons/im"
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { SchedulesContext } from "../../providers/schedules";
+
 
 function CardSchedule (props) {
 
-    const {service, provider, date, hour, id} = props.schedule
+    const {deleteSchedule} = useContext(SchedulesContext)
+
+    const {serviceDescription, provider, serviceDate, hour, id} = props.schedule
+
+    console.log(id)
 
     const [open, setOpen] = useState(false);
 
@@ -19,11 +25,10 @@ function CardSchedule (props) {
 
     return (
         <DivCardSchedule>
-            <p>{service}</p>
+            <p>{serviceDescription}</p>
             <p>{provider}</p>
-            <p>Data: {date}</p>
+            <p>Data: {serviceDate}</p>
             <p>Hora: {hour}</p>
-            <p>Ver detalhes</p>
             <button><ImPencil /> Alterar agendamento</button>
             <button onClick={handleClickOpen}><ImBin /> Cancelar agendamento</button>
             <div>
@@ -43,7 +48,7 @@ function CardSchedule (props) {
                     </DialogContent>
                     <DialogActions>
                     <Button onClick={handleClose}>Voltar</Button>
-                    <Button onClick={handleClose} autoFocus>
+                    <Button onClick={() => deleteSchedule(id)} autoFocus>
                         Quero cancelar
                     </Button>
                     </DialogActions>

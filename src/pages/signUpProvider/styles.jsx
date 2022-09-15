@@ -64,6 +64,10 @@ export const ContainerSignUpProvider = styled.div`
 
   button {
     margin-top: 20px;
+    /* margin-bottom: 20px; */
+  }
+
+  span {
     margin-bottom: 20px;
   }
 

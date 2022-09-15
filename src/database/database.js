@@ -166,3 +166,4 @@ export const baseUrl = 'https://tercerizai-api.herokuapp.com'
 
 export const userToken = localStorage.getItem("token")
 
+export const userId = "23ece2bf-429f-448a-840f-b3f027a131e7"

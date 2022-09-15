@@ -8,15 +8,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../database/database";
-import { useContext } from "react";
-import { UserTokenContext } from "../../providers/userToken";
 import { toast, ToastContainer } from "react-toastify";
 
 function SignIn() {
-  const { token, setToken } = useContext(UserTokenContext);
-
-  const sucsses = () =>
-    toast.success("Você será redirecionado para página inicial");
+  const failed = () => toast.error("Email ou senha incorreta");
 
   let navigate = useNavigate();
   const schema = yup.object().shape({
@@ -39,13 +34,14 @@ function SignIn() {
       .post(`${baseUrl}/login`, data)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
         if (res.data.isProvider) {
           navigate("/dashboard");
         } else {
           navigate("/home");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => failed());
   };
 
   return (
