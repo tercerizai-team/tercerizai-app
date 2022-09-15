@@ -14,8 +14,8 @@ import { toast, ToastContainer } from "react-toastify";
 function SignUpProvider() {
   let navigate = useNavigate();
 
-  const sucsses = () =>
-    toast.success("Você será redirecionado para página inicial");
+  const sucsses = () => toast.success("Usuário cadastrado com sucesso");
+  const failed = () => toast.error("Email ou senha incorreta");
 
   const schema = yup.object().shape({
     imageUrl: yup.string().url("Deve ser um link URL"),
@@ -60,9 +60,9 @@ function SignUpProvider() {
       .then((res) => {
         console.log(res);
         sucsses();
-        setTimeout(navigate("/signIn"), 5000);
+        navigate("/signIn");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => failed());
   };
 
   return (

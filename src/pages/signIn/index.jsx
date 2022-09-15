@@ -11,8 +11,7 @@ import { baseUrl } from "../../database/database";
 import { toast, ToastContainer } from "react-toastify";
 
 function SignIn() {
-  const sucsses = () =>
-    toast.success("Você será redirecionado para página inicial");
+  const failed = () => toast.error("Email ou senha incorreta");
 
   let navigate = useNavigate();
   const schema = yup.object().shape({
@@ -41,7 +40,7 @@ function SignIn() {
           navigate("/home");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => failed());
   };
 
   return (

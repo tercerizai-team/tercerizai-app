@@ -1,7 +1,7 @@
 import { Btn } from "../landingPage/styles";
 import { Content } from "../signIn/styles";
 import pessoa from "../../assets/pessoa.png";
-import { ContainerImageSignUp, ContainerSignUp } from "./styles";
+import { ContainerImageSignUp } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,8 +14,8 @@ import { ContainerSignUpProvider } from "../signUpProvider/styles";
 function SignUpUser() {
   let navigate = useNavigate();
 
-  const sucsses = () =>
-    toast.success("Você será redirecionado para página inicial");
+  const sucsses = () => toast.success("Usuário cadastrado com sucesso");
+  const failed = () => toast.success("Email ou senha incorreta");
 
   const schema = yup.object().shape({
     imageUrl: yup.string().url("Deve ser um link URL"),
@@ -56,9 +56,9 @@ function SignUpUser() {
       .then((res) => {
         console.log(res);
         sucsses();
-        setTimeout(navigate("/signIn"), 5000);
+        navigate("/signIn");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => failed());
   };
 
   return (
