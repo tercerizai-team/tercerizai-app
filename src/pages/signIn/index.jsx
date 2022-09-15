@@ -34,6 +34,7 @@ function SignIn() {
       .post(`${baseUrl}/login`, data)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
         if (res.data.isProvider) {
           navigate("/dashboard");
         } else {
