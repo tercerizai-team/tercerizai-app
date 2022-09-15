@@ -4,14 +4,36 @@ import { baseUrl, schedules } from "../database/database";
 
 export const SchedulesContext = createContext([]);
 
-export const SchedulesProdiver = ({children}) => {
+export const SchedulesProdiver = ({ children }) => {
+  const [dbSchedules, setDbSchedules] = useState([]);
 
-    const [dbSchedules, setDbSchedules] = useState([])
+  useEffect(() => {
+    setDbSchedules(schedules);
+  }, []);
+  
+  const userId = localStorage.getItem('userId')
+  const userToken = localStorage.getItem('token')
 
-    const userId = localStorage.getItem('userId')
-    const userToken = localStorage.getItem('token')
 
-    useEffect(() => {
+  const createSchedule = async (data) => {
+    let response = false;
+    await axios
+      .post(`${baseUrl}/schedule`, (data), {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then((res) => {
+        response = true;
+      })
+      .catch((err) => console.log(err));
+
+    return response;
+  };
+  
+  
+  
+  useEffect(() => {
         axios.get(`${baseUrl}/users/${userId}`, {
             headers: {
                 Authorization: `Bearer ${userToken}`
@@ -32,9 +54,9 @@ export const SchedulesProdiver = ({children}) => {
         .catch((err) => console.log(err))
     }
 
-    return (
-        <SchedulesContext.Provider value={{dbSchedules, setDbSchedules, deleteSchedule}}>
-            {children}
-        </SchedulesContext.Provider>
-    )
-}
+  return (
+    <SchedulesContext.Provider value={{ dbSchedules, setDbSchedules, createSchedule, deleteSchedule}}>
+      {children}
+    </SchedulesContext.Provider>
+  );
+};

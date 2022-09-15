@@ -165,3 +165,4 @@ export const userAddresses = [
 export const baseUrl = 'https://tercerizai-api.herokuapp.com'
 
 export const profilePhoto = 'https://i.ibb.co/MNFBHkr/silhueta.png'
+

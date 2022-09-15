@@ -14,19 +14,17 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MenuItem, Select } from "@mui/material";
 import { AddressesContext } from "../../providers/userAddresses.provider";
+import { SchedulesContext } from "../../providers/schedules";
+import { useParams } from "react-router-dom";
 import { profilePhoto } from "../../database/database";
-
-
 
 
 
 function ProviderPage(props) {
 
   const {dbAddresses} = useContext(AddressesContext)
+  const {createSchedule} = useContext(SchedulesContext)
 
-  
-
-  const [agendamento, setAgendamento] = useState({});
   const [detailsSchedule, setDetailsSchedule] = useState('')
   const [userAddress, setUserAddress] = useState('Selecione')
 
@@ -43,19 +41,15 @@ function ProviderPage(props) {
 
   const handleSchedule = () => {
 
-    setAgendamento({
-      serviceDate: `${value.$y}-${value.$M+1}-${value.$D}`,
+    createSchedule({
       hour: `${valueHour.$H}:${valueHour.$m}`,
-      finishServiceHour: `${valueHour.$H+1}:${valueHour.$m}`,
+      serviceDate: `${value.$y}-${value.$M+1}-${value.$D}`,
       description: detailsSchedule,
-      value: 0,
+      value: 50,
       providerId: idSeller,
       addressId: userAddress
     })
   }
-
-  console.log(agendamento)
-
 
   const { idSeller } = props.idSeller;
 
@@ -118,7 +112,7 @@ function ProviderPage(props) {
                 >
                     <MenuItem value={'Selecione'}>Selecione</MenuItem>
                     {dbAddresses.map((elem) => (
-                      <MenuItem key={elem.id} value={elem.id}>{elem.address.street}</MenuItem>
+                      <MenuItem key={elem.id} value={elem.address.id}>{elem.address.street}</MenuItem>
                     ))}
                 </Select>
           <button className="btnConfirmSchedule" onClick={() => handleSchedule()}>Agendar</button>
