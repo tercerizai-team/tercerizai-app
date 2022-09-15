@@ -164,4 +164,5 @@ export const userAddresses = [
 
 export const baseUrl = 'https://tercerizai-api.herokuapp.com'
 
-export const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGVnYW9AZ21haWwuY29tIiwidXNlcklkIjoiMjNlY2UyYmYtNDI5Zi00NDhhLTg0MGYtYjNmMDI3YTEzMWU3IiwidXNlcklzQWRtIjpmYWxzZSwiaWF0IjoxNjYzMTkxODE4LCJleHAiOjE2NjMxOTkwMTh9.KpewBPX9aBxGkl6BHLCdrz_TYdRONu7FsdJCW4An2Is"
+export const userToken = localStorage.getItem("token")
+
