@@ -164,6 +164,4 @@ export const userAddresses = [
 
 export const baseUrl = 'https://tercerizai-api.herokuapp.com'
 
-export const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lbGVnYW9AZ21haWwuY29tIiwidXNlcklkIjoiMjNlY2UyYmYtNDI5Zi00NDhhLTg0MGYtYjNmMDI3YTEzMWU3IiwidXNlcklzQWRtIjpmYWxzZSwiaWF0IjoxNjYzMTk5NjM4LCJleHAiOjE2NjMyMDY4Mzh9.Xyp2yCzT20H70-igPZHWEQ_jTM_fqqUz-ZCDaYQsvzQ"
-
-export const userId = "23ece2bf-429f-448a-840f-b3f027a131e7"
+export const profilePhoto = 'https://i.ibb.co/MNFBHkr/silhueta.png'
