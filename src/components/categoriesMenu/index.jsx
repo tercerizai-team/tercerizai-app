@@ -10,8 +10,6 @@ import { wilcox } from "../../database/database"
 
 function CategoriesMenu () {
 
-    console.log(wilcox)
-
     return (
         <CategoriesMenuContainer>
             <CardCategory>
