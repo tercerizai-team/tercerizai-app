@@ -6,6 +6,7 @@ import reformas from "../../assets/icons/reformas.png"
 import saude from "../../assets/icons/saude.png"
 import veiculos from "../../assets/icons/veiculos.png"
 import todos from "../../assets/icons/todos.png"
+import { wilcox } from "../../database/database"
 
 function CategoriesMenu () {
 

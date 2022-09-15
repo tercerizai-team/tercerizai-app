@@ -140,14 +140,14 @@ export const userAddresses = [
     },
     {
         id: "c110dbb6-beb9-4682-ab63-2c12a570d66c",
-        state: "SP",
+        state: "RJ",
         street: "Rua Sergipe",
         district: "Higienópolis",
         number: "447",
         complement: "Cj 112",
-        city: "São Paulo",
+        city: "Rio de Janeiro",
         zipCode: "01243001",
-        name: "Trabalho"
+        name: "Casa"
     },
     {
         id: "c110dbb6-beb9-4682-ab63-2c12a570d66d",
