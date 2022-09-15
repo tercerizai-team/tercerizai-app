@@ -14,6 +14,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MenuItem, Select } from "@mui/material";
 import { AddressesContext } from "../../providers/userAddresses.provider";
+import { profilePhoto } from "../../database/database";
 
 
 
@@ -58,26 +59,21 @@ function ProviderPage(props) {
 
   const { idSeller } = props.idSeller;
 
-  const newId = Number(idSeller)
-
   const { dbPrestadores } = useContext(PrestadoresContext);
 
-  const prestador = dbPrestadores.find((elem) => elem.id === newId);
+  const prestador = dbPrestadores.find((elem) => elem.id === idSeller);
+  console.log(prestador)
 
   return (
     <ProviderContainer>
         <HeaderPrestador>
-            <img src={prestador?.imagem} alt={prestador?.name}/>
+            <img src={prestador?.imageUrl === null? profilePhoto : prestador?.imageUrl} alt={prestador?.name}/>
             <div>
                 <p className="prestadorName">{prestador?.name}</p>
-                <p className="prestadorCategory">{prestador?.category}</p>
+                <p className="prestadorCategory">{prestador?.email}</p>
             </div>
         </HeaderPrestador>
-        {/* <CalendarPrestador>
-            <h3>Selecione a melhor data para o serviço</h3>
-            <Calendar onChange={onChange} value={value}/>
-            <button onClick={handleSchedule} className="btnNextTime">Escolher horário</button>
-        </CalendarPrestador> */}
+
       <BookingDiv>
         <div className="BookingDiv1">
           <LocalizationProvider dateAdapter={AdapterDayjs}>

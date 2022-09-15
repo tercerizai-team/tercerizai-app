@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import { prestadores } from "../database/database";
+import { baseUrl, prestadores } from "../database/database";
+import axios from "axios";
 
 
 export const PrestadoresContext = createContext([]);
@@ -9,7 +10,10 @@ export const PrestadoresProvider = ({ children }) => {
     const [dbPrestadores, setDbPrestadores] = useState([]);
 
     useEffect(() => {
-        setDbPrestadores(prestadores)
+
+        axios.get(`${baseUrl}/providers`).then((res) => setDbPrestadores(res.data)).catch((err) => console.log(err))
+
+        // setDbPrestadores(prestadores)
     },[])
 
     return (

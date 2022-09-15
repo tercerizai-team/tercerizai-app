@@ -6,6 +6,9 @@ export const AddressesContext = createContext([]);
 
 export const AddressesProvider = ({children}) => {
 
+    const userId = localStorage.getItem('userId')
+    const userToken = localStorage.getItem('token')
+
     const [dbAddresses, setDbAddresses] = useState([]);
     
     const registerNewAddress = async (data) => {

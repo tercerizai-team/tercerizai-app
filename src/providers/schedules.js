@@ -1,12 +1,15 @@
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
-import { baseUrl, schedules, userId, userToken } from "../database/database";
+import { baseUrl, schedules } from "../database/database";
 
 export const SchedulesContext = createContext([]);
 
 export const SchedulesProdiver = ({children}) => {
 
     const [dbSchedules, setDbSchedules] = useState([])
+
+    const userId = localStorage.getItem('userId')
+    const userToken = localStorage.getItem('token')
 
     useEffect(() => {
         axios.get(`${baseUrl}/users/${userId}`, {
