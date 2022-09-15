@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
-import { baseUrl, schedules, userId, userToken } from "../database/database";
+import { baseUrl, schedules } from "../database/database";
 
 export const SchedulesContext = createContext([]);
 
@@ -10,6 +10,10 @@ export const SchedulesProdiver = ({ children }) => {
   useEffect(() => {
     setDbSchedules(schedules);
   }, []);
+  
+  const userId = localStorage.getItem('userId')
+  const userToken = localStorage.getItem('token')
+
 
   const createSchedule = async (data) => {
     let response = false;
@@ -26,6 +30,8 @@ export const SchedulesProdiver = ({ children }) => {
 
     return response;
   };
+  
+  
   
   useEffect(() => {
         axios.get(`${baseUrl}/users/${userId}`, {

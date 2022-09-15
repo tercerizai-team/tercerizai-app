@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 function Prestadores () {
 
     const idSeller = useParams()
-
+    
     return (
         <>
             <Header />
