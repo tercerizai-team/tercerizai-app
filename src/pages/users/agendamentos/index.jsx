@@ -5,10 +5,14 @@ import {HiStar} from "react-icons/hi"
 import { useContext } from "react";
 import { SchedulesContext } from "../../../providers/schedules";
 import CardSchedule from "../../../components/cardSchedules";
+import { useEffect } from "react";
 
 function Agendamentos () {
 
-    const {dbSchedules} = useContext(SchedulesContext)
+    const {dbSchedules, listSchedules} = useContext(SchedulesContext)
+    useEffect(() => {
+        listSchedules()
+      }, []);
 
     return (
         <>

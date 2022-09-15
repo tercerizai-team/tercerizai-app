@@ -50,7 +50,6 @@ function SignUpUser() {
 
   const onSubmit = (data) => {
     delete data.passwordConfirm;
-    console.log(data);
     axios
       .post(`${baseUrl}/users`, data)
       .then((res) => {
