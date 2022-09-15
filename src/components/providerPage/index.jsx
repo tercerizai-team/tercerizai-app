@@ -15,10 +15,9 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MenuItem, Select } from "@mui/material";
 import { AddressesContext } from "../../providers/userAddresses.provider";
 import { SchedulesContext } from "../../providers/schedules";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { profilePhoto } from "../../database/database";
-
-
+import { toast } from "react-toastify";
 
 function ProviderPage(props) {
 
@@ -31,6 +30,8 @@ function ProviderPage(props) {
   const [value, setValue] = useState(null);
   const [valueHour, setValueHour] = useState(null)
 
+  const [disableButton, setDisableButton] = useState(false)
+
   const handleAddress = (event) => {
     setUserAddress(event.target.value)
   }
@@ -39,16 +40,39 @@ function ProviderPage(props) {
     setValue(newValue);
   };
 
+  const navigate = useNavigate()
+
+
   const handleSchedule = () => {
 
-    createSchedule({
-      hour: `${valueHour.$H}:${valueHour.$m}`,
-      serviceDate: `${value.$y}-${value.$M+1}-${value.$D}`,
-      description: detailsSchedule,
-      value: 50,
-      providerId: idSeller,
-      addressId: userAddress
-    })
+    const response = new Promise (async(resolve, reject) => {
+      setDisableButton(true)
+      const newAddress = await createSchedule({
+        hour: `${valueHour.$H}:${valueHour.$m}`,
+        serviceDate: `${value.$y}-${value.$M+1}-${value.$D}`,
+        description: detailsSchedule,
+        value: 50,
+        providerId: idSeller,
+        addressId: userAddress
+      })
+
+      if (newAddress) {
+          setTimeout(resolve)
+          navigate("/users/agendamentos")
+
+      } else {
+          setTimeout(reject)
+          setDisableButton(false)
+      }
+  })
+
+  toast.promise(response, {
+      pending: 'Processando',
+      success: 'Agendamento cadastrado',
+      error: 'Erro no Agendamento'
+  })
+
+    
   }
 
   const { idSeller } = props.idSeller;
@@ -56,7 +80,7 @@ function ProviderPage(props) {
   const { dbPrestadores } = useContext(PrestadoresContext);
 
   const prestador = dbPrestadores.find((elem) => elem.id === idSeller);
-  console.log(prestador)
+
 
   return (
     <ProviderContainer>
@@ -115,7 +139,7 @@ function ProviderPage(props) {
                       <MenuItem key={elem.id} value={elem.address.id}>{elem.address.street}</MenuItem>
                     ))}
                 </Select>
-          <button className="btnConfirmSchedule" onClick={() => handleSchedule()}>Agendar</button>
+          <button disabled={disableButton} className="btnConfirmSchedule" onClick={() => handleSchedule()}>Agendar</button>
         </div>
     </BookingDiv>
 

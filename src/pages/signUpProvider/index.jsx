@@ -54,11 +54,9 @@ function SignUpProvider() {
 
   const onSubmit = (data) => {
     delete data.passwordConfirm;
-    console.log(data);
     axios
       .post(`${baseUrl}/users`, data)
       .then((res) => {
-        console.log(res);
         sucsses();
         navigate("/signIn");
       })
