@@ -8,13 +8,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../database/database";
-import { useContext } from "react";
-import { UserTokenContext } from "../../providers/userToken";
 import { toast, ToastContainer } from "react-toastify";
 
 function SignIn() {
-  const { token, setToken } = useContext(UserTokenContext);
-
   const sucsses = () =>
     toast.success("Você será redirecionado para página inicial");
 

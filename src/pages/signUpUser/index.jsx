@@ -7,8 +7,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { baseUrl } from "../../database/database";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { ContainerSignUpProvider } from "../signUpProvider/styles";
 
 function SignUpUser() {
   let navigate = useNavigate();
@@ -23,7 +24,13 @@ function SignUpUser() {
       .required("Campo obrigatório")
       .matches(/^[aA-zZ\s]+$/, "Esse campo só pode receber letras"),
     email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
-    phone: yup.string().required("Campo obrigatório"),
+    phone: yup
+      .string()
+      .required("Campo obrigatório")
+      .matches(
+        /^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}-?[0-9]{4}$/,
+        "Número inválido"
+      ),
     password: yup.string().required("Campo obrigatório"),
     passwordConfirm: yup
       .string()
@@ -49,7 +56,7 @@ function SignUpUser() {
       .then((res) => {
         console.log(res);
         sucsses();
-        navigate("/login");
+        setTimeout(navigate("/signIn"), 5000);
       })
       .catch((err) => console.log(err));
   };
@@ -57,10 +64,10 @@ function SignUpUser() {
   return (
     <Content>
       <ToastContainer />
-      <ContainerImageSignUp heigh="460px" width="280px">
+      <ContainerImageSignUp heigh="430px" width="280px">
         <img src={pessoa} alt="pessoa" />
       </ContainerImageSignUp>
-      <ContainerSignUp heigh="500px" width="280px">
+      <ContainerSignUpProvider heigh="450px" width="280px">
         <form onSubmit={handleSubmit(onSubmit)}>
           {errors.imageUrl ? (
             <h3>{errors.imageUrl?.message}</h3>
@@ -89,7 +96,7 @@ function SignUpUser() {
 
           {errors.phone ? <h3>{errors.phone?.message}</h3> : <p>Telefone</p>}
           <input
-            placeholder="Telefone"
+            placeholder="(DDD)000000000"
             {...register("phone")}
             className={errors.phone ? "erro" : ""}
           ></input>
@@ -113,10 +120,12 @@ function SignUpUser() {
             {...register("passwordConfirm")}
             className={errors.passwordConfirm ? "erro" : ""}
           ></input>
-
           <Btn>Cadastrar</Btn>
+          <span>
+            Já tem uma conta? Faça <Link to={"/signIn"}>login</Link>
+          </span>
         </form>
-      </ContainerSignUp>
+      </ContainerSignUpProvider>
     </Content>
   );
 }

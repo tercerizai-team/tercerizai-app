@@ -6,8 +6,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Btn } from "../landingPage/styles";
 import { ContainerImageSignUp } from "../signUpUser/styles";
 import { ContainerSignUpProvider } from "./styles";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { baseUrl } from "../../database/database";
+import { toast, ToastContainer } from "react-toastify";
 
 function SignUpProvider() {
+  let navigate = useNavigate();
+
+  const sucsses = () =>
+    toast.success("Você será redirecionado para página inicial");
+
   const schema = yup.object().shape({
     imageUrl: yup.string().url("Deve ser um link URL"),
     name: yup
@@ -16,6 +25,13 @@ function SignUpProvider() {
       .matches(/^[aA-zZ\s]+$/, "Esse campo só pode receber letras"),
     email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
     password: yup.string().required("Campo obrigatório"),
+    phone: yup
+      .string()
+      .required("Campo obrigatório")
+      .matches(
+        /^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}-?[0-9]{4}$/,
+        "Número inválido"
+      ),
     passwordConfirm: yup
       .string()
       .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
@@ -23,8 +39,8 @@ function SignUpProvider() {
       state: yup.string().required("Campo obrigatório"),
       street: yup.string().required("Campo obrigatório"),
       district: yup.string().required("Campo obrigatório"),
-      number: yup.string().required("Campo obrigatório"),
       complement: yup.string(),
+      number: yup.string().required("Campo obrigatório"),
       city: yup.string().required("Campo obrigatório"),
       zipCode: yup.string().required("Campo obrigatório"),
     }),
@@ -39,10 +55,19 @@ function SignUpProvider() {
   const onSubmit = (data) => {
     delete data.passwordConfirm;
     console.log(data);
+    axios
+      .post(`${baseUrl}/users`, data)
+      .then((res) => {
+        console.log(res);
+        sucsses();
+        setTimeout(navigate("/signIn"), 5000);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <Content>
+      <ToastContainer />
       <ContainerImageSignUp heigh="430px" width="280px">
         <img src={eletricista} alt="eletricista" />
       </ContainerImageSignUp>
@@ -71,6 +96,13 @@ function SignUpProvider() {
             placeholder="Email"
             {...register("email")}
             className={errors.email ? "erro" : ""}
+          ></input>
+
+          {errors?.phone ? <h3>{errors.phone?.message}</h3> : <p>Telefone</p>}
+          <input
+            placeholder="(DDD)000000000"
+            {...register("phone")}
+            className={errors.phone ? "erro" : ""}
           ></input>
 
           {errors.password ? <h3>{errors.password?.message}</h3> : <p>Senha</p>}
@@ -153,17 +185,6 @@ function SignUpProvider() {
             className={errors.address?.street ? "erro" : ""}
           ></input>
 
-          {errors.address?.district ? (
-            <h3>{errors.address?.district?.message}</h3>
-          ) : (
-            <p>Bairro</p>
-          )}
-          <input
-            placeholder="Bairro"
-            {...register("address.district")}
-            className={errors.address?.district ? "erro" : ""}
-          ></input>
-
           {errors.address?.number ? (
             <h3>{errors.address?.number?.message}</h3>
           ) : (
@@ -173,6 +194,17 @@ function SignUpProvider() {
             placeholder="Número"
             {...register("address.number")}
             className={errors.address?.number ? "erro" : ""}
+          ></input>
+
+          {errors.address?.district ? (
+            <h3>{errors.address?.district?.message}</h3>
+          ) : (
+            <p>Bairro</p>
+          )}
+          <input
+            placeholder="Bairro"
+            {...register("address.district")}
+            className={errors.address?.district ? "erro" : ""}
           ></input>
 
           {errors.address?.zipCode ? (
@@ -198,6 +230,10 @@ function SignUpProvider() {
           ></input>
 
           <Btn>Cadastrar</Btn>
+
+          <span>
+            Já tem uma conta? Faça <Link to={"/signIn"}>login</Link>
+          </span>
         </form>
       </ContainerSignUpProvider>
     </Content>
